@@ -1,10 +1,10 @@
 // next.config.mjs
 const isProd = process.env.GITHUB_ACTIONS === 'true';
-const repo = 'Harlem-Cake'; // nombre EXACTO del repo (respeta mayúsculas)
+const repo = 'Harlem-Cake';
 
 const nextConfig = {
-  output: 'export',               // genera ./out para GitHub Pages
-  images: { unoptimized: true },  // necesario en GH Pages (sin Image Optimization)
+  output: 'export',
+  images: { unoptimized: true },
   basePath: isProd ? `/${repo}` : '',
   assetPrefix: isProd ? `/${repo}/` : '',
   env: {
