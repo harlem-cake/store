@@ -7,16 +7,16 @@ import { PALETTE } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 type Slide = {
-  src: string;
+  src: string;       // Debe empezar con "/banners/..." (carpeta public)
   alt?: string;
   caption?: string;
 };
 
 type Props = {
   images: Slide[];
-  accent?: string;      // color para controles y dots (por defecto rosa)
-  className?: string;   // estilos extra del contenedor
-  intervalMs?: number;  // autoplay (ms)
+  accent?: string;
+  className?: string;
+  intervalMs?: number;
 };
 
 export default function BannerCarousel({
@@ -48,6 +48,9 @@ export default function BannerCarousel({
 
   const go = (i: number) => setIndex((i + total) % total);
 
+  // Si no hay imágenes, no renderizamos nada
+  if (total === 0) return null;
+
   return (
     <div
       className={cn(
@@ -68,31 +71,28 @@ export default function BannerCarousel({
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
           <Image
-            src={images[index]?.src}
-            alt={images[index]?.alt ?? `slide-${index + 1}`}
+            // 👇 IMPORTANTE: rutas absolutas desde /public (NO withBasePath)
+            src={images[index]!.src}
+            alt={images[index]!.alt ?? `slide-${index + 1}`}
             fill
             className="object-cover"
             sizes="100vw"
-            priority
+            priority={index === 0}  // solo el primer slide con prioridad
           />
-          {/* Caption opcional */}
+
           {images[index]?.caption && (
             <div className="absolute left-0 right-0 bottom-0 p-4 sm:p-6">
               <div
                 className="inline-block backdrop-blur-sm rounded-2xl px-4 py-2 text-sm sm:text-base"
-                style={{
-                  background: `${accent}cc`,
-                  color: "#5a4638",
-                }}
+                style={{ background: `${accent}cc`, color: "#5a4638" }}
               >
-                {images[index].caption}
+                {images[index]!.caption}
               </div>
             </div>
           )}
         </motion.div>
       </AnimatePresence>
 
-      {/* Controles */}
       {total > 1 && (
         <>
           <button
@@ -112,7 +112,6 @@ export default function BannerCarousel({
             ›
           </button>
 
-          {/* Dots */}
           <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2">
             {images.map((_, i) => (
               <button
