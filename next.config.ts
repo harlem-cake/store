@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+// next.config.js
+/** @type {import('next').NextConfig} */
+const isGH = process.env.GITHUB_ACTIONS === 'true';
 
-const nextConfig: NextConfig = {
-  /* config options here */
+module.exports = {
+  output: 'export',                   // ✅ reemplaza a "next export"
+  images: { unoptimized: true },      // ✅ necesario en GitHub Pages
+  trailingSlash: true,                // ✅ genera index.html por carpeta (mejor en GH Pages)
 };
-
-export default nextConfig;

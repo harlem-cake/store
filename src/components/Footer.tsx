@@ -16,7 +16,7 @@ export default function Footer() {
   const pathname = usePathname();
   const isScoops = pathname.startsWith("/scoops");
   const accent   = isScoops ? PALETTE.blue : PALETTE.pink;
-  const shopName = isScoops ? "Harlem Scoops" : "Harlem Cakes";
+  const shopName = isScoops ? "Harlem Scoops" : "Harlem Cake";
   const logo     = isScoops ? LOGOS.scoops : LOGOS.cakes;
 
   return (
@@ -54,15 +54,15 @@ export default function Footer() {
         {/* Links */}
         <nav className="flex flex-wrap gap-3 text-sm justify-start sm:justify-center">
           <Link
-            href="/cakes"
+            href="/cake"
             className="px-3 py-1.5 rounded-xl border transition"
             style={{
               borderColor: `${PALETTE.pink}66`,
-              background: pathname.startsWith("/cakes") ? `${PALETTE.pink}33` : "transparent",
+              background: pathname.startsWith("/cake") ? `${PALETTE.pink}33` : "transparent",
               color: PALETTE.brown,
             }}
           >
-            Harlem Cakes
+            Harlem Cake
           </Link>
 
           {/* Cuando quieras volver a mostrar Scoops, descomenta:
