@@ -1,6 +1,6 @@
 // next.config.ts
 const isProd = process.env.GITHUB_ACTIONS === "true";
-const repo = "Harlem-Cake";
+const repo = "store";
 const base = isProd ? `/${repo}` : "";
 
 const nextConfig = {
